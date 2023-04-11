@@ -1,1 +1,1 @@
-u1,Bob,password,mentor;u2,Joe,password,mentee
+u1@gmail.com,John Smith,7,password,mentor;u2@gmail.com,Sarah Eden,4,password,mentor;u3@gmail.com,David Lee,4,password,mentor;u4@gmail.com,Emily Chen,4,password,mentor;u5@gmail.com,Jason Marc,4,password,mentor;u6@gmail.com,Michele Richards,4,password,mentor;u7@gmail.com,Priscilla Peters,4,password,mentor

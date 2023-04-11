@@ -7,37 +7,38 @@ const router = express.Router()
 
 router.get('/:user-:password', (req, res) => {
     fs.readFile('./data/users/users.txt', 'utf8', (err, data) => {
-        let rows = data.split(';')
-        let rows2 = [[]]
-        rows.forEach(row => {
+        let rows = data.split(';') //file into array 
+        let rows2 = [[]] //create second array
+
+        rows.forEach(row => { //create 2 dim array with all records
             for (let x = 0; x < rows.length; x++) {
                 rows2[x] = rows[x].split(',')
             }
         });
 
-        let loggedin = false
+        let loggedIn = false //set login value
 
-        rows2.forEach(row => {
-            if (row[0] == req.params.user && row[2] == req.params.password) {
+        rows2.forEach(row => { //check if any of the records match the values passed by the user
+            tmpPassword = row[3]
+            tmpLogin = row[0]
+            if (tmpLogin == req.params.user && tmpPassword == req.params.password) {
                 //login successful
-                res.send(row)
-                loggedin = true
+                let returnString = row[0] + ',' + row[1] + ',' + row[2] + ',' + row[3]
+                res.send(returnString)
+                console.log('Correct login.')
+                console.log(returnString)
+                loggedIn = true
                 // res.send(row[0] + ',' + row[1] + ',' + row[2] + ',' + row[3])
             }
         });
 
         //login unsuccessful
-        if (!loggedin) {
+        if (!loggedIn) {
             res.send('Incorrect login.')
-            console.log('i get here')
+            console.log('Incorrect login.')
             res.end
         }
       });
 })
-
-// router.param('password', (req, res, next, password) => {
-
-//     next()
-// })
 
 module.exports = router
