@@ -10,9 +10,11 @@ app.use(logger)
 
 const userRouter = require('./routes/user')
 const loginRouter = require('./routes/login')
+const preferenceRouter = require('./routes/preference')
 
 app.use('/user', userRouter)
 app.use('/login', loginRouter)
+app.use('/preference', preferenceRouter)
 
 function logger(req, res, next) {
     console.log(req.originalUrl)
