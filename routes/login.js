@@ -23,7 +23,7 @@ router.get('/:user-:password', (req, res) => {
             tmpLogin = row[0]
             if (tmpLogin == req.params.user && tmpPassword == req.params.password) {
                 //login successful
-                let returnString = row[0] + ',' + row[1] + ',' + row[2] + ',' + row[3]
+                let returnString = row[0] + ',' + row[1] + ',' + row[3] + ',' + row[4]
                 res.send(returnString)
                 console.log('Correct login.')
                 console.log(returnString)
