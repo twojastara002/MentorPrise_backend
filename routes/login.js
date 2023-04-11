@@ -15,16 +15,23 @@ router.get('/:user-:password', (req, res) => {
             }
         });
 
+        let loggedin = false
+
         rows2.forEach(row => {
             if (row[0] == req.params.user && row[2] == req.params.password) {
                 //login successful
-                correctRow = [...row]
-                res.send(correctRow)
+                res.send(row)
+                loggedin = true
                 // res.send(row[0] + ',' + row[1] + ',' + row[2] + ',' + row[3])
             }
         });
+
         //login unsuccessful
-        res.send('Incorrect login.')
+        if (!loggedin) {
+            res.send('Incorrect login.')
+            console.log('i get here')
+            res.end
+        }
       });
 })
 
