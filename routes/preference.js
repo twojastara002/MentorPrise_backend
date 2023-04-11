@@ -16,8 +16,7 @@ router.get('/add/:userEmail-:location-:minExperience-:department', (req, res) =>
     let writeString = user + ',' + location + ',' + minExperience + ',' + department
 
     userID = user.substring(0, user.indexOf('@'))
-    console.log(writeString)
-    console.log(userID)
+
 
     // write the file 
     fs.writeFile('./data/preferences/preferenceFor' + userID + '.txt', writeString, 'utf8', function(err) {
@@ -34,13 +33,8 @@ router.get('/add/:userEmail-:location-:minExperience-:department', (req, res) =>
 //reads file
 router.get('/read/:userEmail', (req, res) => {
     let user = req.params.userEmail
-    // let location = req.params.location
-    // let minExperience = req.params.minExperience
-    // let department = req.params.department
 
     userID = user.substring(0, user.indexOf('@'))
-    console.log(user)
-    console.log(userID)
 
     // check if the preference file exists
     if (fs.existsSync('./data/preferences/preferenceFor' + userID + '.txt')) {
