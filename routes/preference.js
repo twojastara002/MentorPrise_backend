@@ -30,6 +30,30 @@ router.get('/add/:userEmail-:location-:minExperience-:department', (req, res) =>
     })
 })
 
+//remove the file
+router.get('/remove/:userEmail', (req, res) => {
+    let user = req.params.userEmail
+    userID = user.substring(0, user.indexOf('@'))
+    let filepath = './data/preferences/preferenceFor' + userID + '.txt'
+
+    if (fs.existsSync(filepath)) {
+        // unlink(remove) the file 
+        fs.unlink(filepath, (err) => {
+            if (err) { //something went wrong
+                console.log('file NOT removed')
+                res.send('Preference failed to remove.')
+            } else { // no error
+                console.log('Preference removed successfully.')
+                res.send('Preference removed successfully.')
+            }
+        })
+    } else {
+        //say that there are no preference files for user with ID @userID
+        console.log('No file found.')
+        res.send('No preference found for the user: ' + user)
+    }
+})
+
 //reads file
 router.get('/read/:userEmail', (req, res) => {
     let user = req.params.userEmail
@@ -50,6 +74,7 @@ router.get('/read/:userEmail', (req, res) => {
                 let department = readData[3]
                 let writeString = user + ',' + location + ',' + minExperience + ',' + department //create a string to send to the client
                 res.send(writeString) //send the string with the data
+                console.log('sent preference ' + writeString)
             }
         })
     } else {

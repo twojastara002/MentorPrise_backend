@@ -40,4 +40,38 @@ router.get('/:user-:password', (req, res) => {
       });
 })
 
+router.get('/:user', (req, res) => {
+    fs.readFile('./data/users/users.txt', 'utf8', (err, data) => {
+        let rows = data.split(';') //file into array 
+        let rows2 = [[]] //create second array
+
+        rows.forEach(row => { //create 2 dim array with all records
+            for (let x = 0; x < rows.length; x++) {
+                rows2[x] = rows[x].split(',')
+            }
+        });
+
+        let found = false //set found value
+
+        rows2.forEach(row => { //check if any of the records match the values passed by the user
+            tmpLogin = row[0]
+            if (tmpLogin == req.params.user) {
+                //found successful
+                let returnString = row[0] + ',' + row[1] + ',' + row[4] + ',' + row[5] + ',' + row[3]
+                res.send(returnString)
+                console.log('User found.')
+                console.log(returnString)
+                found = true
+            }
+        });
+
+        //found unsuccessful
+        if (!found) {
+            res.status(500).send('No user found.')
+            console.log('No user found.')
+            res.end
+        }
+      });
+})
+
 module.exports = router
