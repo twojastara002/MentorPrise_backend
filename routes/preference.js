@@ -41,7 +41,6 @@ router.get('/read/:userEmail', (req, res) => {
         //read the file 
         fs.readFile('./data/preferences/preferenceFor' + userID + '.txt', 'utf8', (err,data) => {
             if (err) { //something went wrong
-                console.log('all fucked up shit')
                 res.send('internal server error')
                 throw err
             } else { // no error

@@ -19,16 +19,15 @@ router.get('/:user-:password', (req, res) => {
         let loggedIn = false //set login value
 
         rows2.forEach(row => { //check if any of the records match the values passed by the user
-            tmpPassword = row[3]
+            tmpPassword = row[4]
             tmpLogin = row[0]
             if (tmpLogin == req.params.user && tmpPassword == req.params.password) {
                 //login successful
-                let returnString = row[0] + ',' + row[1] + ',' + row[3] + ',' + row[4]
+                let returnString = row[0] + ',' + row[1] + ',' + row[4] + ',' + row[5]
                 res.send(returnString)
                 console.log('Correct login.')
                 console.log(returnString)
                 loggedIn = true
-                // res.send(row[0] + ',' + row[1] + ',' + row[2] + ',' + row[3])
             }
         });
 
