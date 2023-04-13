@@ -1,1 +1,1 @@
-2,u2@gmail.com,u6@gmail.com
+3,u12@gmail.com,u1@gmail.com;4,u2@gmail.com,u12@gmail.com;5,u4@gmail.com,u10@gmail.com
