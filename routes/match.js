@@ -141,4 +141,38 @@ router.get('/remove/:u1-:u2', (req, res) => {
     }
 })
 
+//read and return all matches for user specified
+router.get('/read/:u1', (req, res) => {
+    let u1 = req.params.u1
+
+    //if file is empty or doesn't exist then don't do anything
+    if (!fs.existsSync(filePath)) {
+        res.send('no matches exist')
+    } else {
+        //read in the whole file
+        fs.readFile('./data/matches/matches.txt', 'utf8', (err, data) => {
+            let x = 0
+            let matches = data.split(';')
+            //create a string and copy over all matches up to the one with the marked index
+            let matchesTMP = ''
+            matches.forEach(match => { //iterate all matches
+                matchArray = match.split(',')
+                //find which matches to return
+                if (matchArray[1] == u1  ||  matchArray[2] == u1) {
+                    matchesTMP = matchesTMP + match + ';'
+                    x += 1
+                }
+            });
+            if (x = 0) {
+                res.send('no matches found')
+            } else {
+                //return the matches
+                //remove last semicolon
+                matchesTMP = matchesTMP.substring(0,matchesTMP.length-1)
+                res.send(matchesTMP)
+            }
+        })   
+    }
+})
+
 module.exports = router
